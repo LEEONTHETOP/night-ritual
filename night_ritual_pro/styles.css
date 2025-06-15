@@ -1,0 +1,112 @@
+/* ===== 基础 ===== */
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Poppins",sans-serif;}
+html,body{height:100%;overflow:hidden;transition:background .8s,color .8s;}
+
+/* 主题背景色 */
+body.dark{background:#050c22;color:#eaf6ff;}
+body.light{background:#fdfdff;color:#1e1e1e;}
+
+/* 背景图（白昼/夜晚极光渐变）*/
+.bg{
+  position:absolute;inset:0;background-size:cover;background-position:center;
+  transition:background-image 1s,filter 1s;
+}
+body.dark .bg{filter:brightness(0.65) saturate(1.2);}
+body.light .bg{filter:brightness(0.9);}
+
+/* 星空 */
+.stars{position:absolute;inset:0;pointer-events:none;z-index:1;}
+
+/* 霓虹时钟 */
+#clock{
+  position:absolute;top:20px;left:20px;z-index:4;
+  font-size:1.25rem;font-weight:600;letter-spacing:1px;
+  padding:10px 16px;border-radius:22px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  animation:clockGlow 5s linear infinite;
+}
+@keyframes clockGlow{
+  0%{box-shadow:0 0 10px #ff80ff, 0 0 20px #ff80ff;}
+  50%{box-shadow:0 0 10px #8ff, 0 0 20px #8ff;}
+  100%{box-shadow:0 0 10px #ff80ff, 0 0 20px #ff80ff;}
+}
+
+/* 主题按钮 */
+#themeToggle{
+  position:absolute;top:20px;right:20px;z-index:4;
+  padding:12px;border:none;border-radius:50%;
+  background:rgba(255,255,255,.25);cursor:pointer;font-size:1.35rem;
+  backdrop-filter:blur(8px);transition:.3s;
+}
+#themeToggle:hover{transform:rotate(20deg) scale(1.1);}
+
+/* 中央标题 */
+.title-glow{
+  text-shadow:0 0 10px rgba(255,255,255,.55),0 0 30px rgba(136,255,255,.45);
+  font-size:2.6rem;margin-bottom:28px;
+}
+
+/* 按钮容器 */
+.btn-container{display:flex;gap:18px;flex-wrap:wrap;justify-content:center;margin:18px 0;}
+
+/* 玻璃按钮 + 科技描边 */
+.btn-glass{
+  position:relative;overflow:hidden;
+  padding:14px 28px;border-radius:30px;border:1px solid rgba(255,255,255,.35);
+  background:rgba(255,255,255,.15);backdrop-filter:blur(10px);
+  color:inherit;font-size:1rem;cursor:pointer;transition:.4s;
+}
+.btn-glass:hover{box-shadow:0 0 10px #8ff,0 0 25px #8ff;background:rgba(255,255,255,.25);}
+.btn-glass:active{transform:scale(.95);}
+
+/* 玻璃弹窗 */
+.glass{
+  background:rgba(30,45,85,.9);border:1px solid rgba(255,255,255,.25);
+  backdrop-filter:blur(16px);
+}
+body.light .glass{background:rgba(255,255,255,.85);color:#222;}
+
+/* 文字信息 */
+.info{margin-top:16px;font-size:.95rem;font-style:italic;}
+
+/* 呼吸动画 */
+.countdown{font-size:2.2rem;margin:20px 0;}
+.breath-wrap{position:relative;width:240px;height:240px;margin:0 auto;}
+.breath-circle{
+  position:absolute;inset:0;border-radius:50%;
+  background:radial-gradient(circle,#8ff 25%,rgba(136,255,255,.25) 70%);
+  animation:breath 5s ease-in-out infinite;
+}
+@keyframes breath{
+  0%{transform:scale(.2);}50%{transform:scale(1);}100%{transform:scale(.2);}
+}
+
+/* Mood 按钮 */
+.mood-grid{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin:20px 0;}
+.mood-btn{
+  width:60px;height:60px;border-radius:50%;font-size:28px;border:none;cursor:pointer;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(6px);transition:.25s;
+}
+.mood-btn:hover{transform:scale(1.15);}
+.mood-btn.selected{box-shadow:0 0 0 4px #8ff;}
+
+/* 星空图表 & 历史滚动 */
+canvas#statsChart{width:100%!important;height:250px!important;border-radius:14px;background:rgba(255,255,255,.12);}
+.history-box{max-height:300px;overflow:auto;background:rgba(255,255,255,.1);padding:12px;border-radius:12px;font-size:.9rem;line-height:1.6;color:#d0eaff;}
+
+/* 醒来按钮 */
+#wakeBtn{
+  position:fixed;bottom:36px;right:36px;z-index:4;
+  padding:18px 28px;border:none;border-radius:34px;
+  background:#82fffa;color:#000;cursor:pointer;display:none;
+  box-shadow:0 8px 18px rgba(0,0,0,.45);font-weight:600;letter-spacing:1px;
+}
+
+/* 弹窗过渡 */
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,.7);display:none;align-items:center;justify-content:center;z-index:3;}
+.overlay.active{display:flex;}
+.modal,.tutorial-box{
+  padding:30px;border-radius:20px;max-width:420px;width:90%;
+  transform:translateY(40px);transition:transform .35s;
+}
+.overlay.active .modal,.overlay.active .tutorial-box{transform:translateY(0);}

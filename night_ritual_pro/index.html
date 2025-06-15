@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>月光仪式 · 极光版</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <!-- 背景 & 星空 -->
+  <div class="bg" id="bg"></div>
+  <canvas class="stars" id="stars"></canvas>
+
+  <!-- 顶部固定：时钟 & 主题 -->
+  <div id="clock"></div>
+  <button id="themeToggle">🌗</button>
+
+  <!-- 教程 -->
+  <div id="tutorial-overlay" class="overlay active">
+    <div class="tutorial-box glass">
+      <h2>欢迎加入月光仪式</h2>
+      <p>放下手机，深呼吸 5 秒，点击「结束今天」记录睡眠。</p>
+      <button class="btn-glass" id="tutorial-ok">开始仪式</button>
+    </div>
+  </div>
+
+  <!-- 主界面 -->
+  <div class="center">
+    <h1 class="title-glow">夜已深，是时候说「晚安」🌙</h1>
+
+    <div class="btn-container">
+      <button class="btn-glass" id="exitBtn">结束今天</button>
+      <button class="btn-glass" id="moodBtn">记录心情</button>
+      <button class="btn-glass" id="viewStats">查看统计</button>
+      <button class="btn-glass" id="viewHistory">历史记录</button>
+    </div>
+
+    <p class="info">已连续 <span id="streak">0</span> 天早睡 · 保持好习惯</p>
+  </div>
+
+  <!-- 醒来按钮 -->
+  <button id="wakeBtn">我醒了 ☀️</button>
+
+  <!-- 第一层关怀 -->
+  <div id="modal-first" class="overlay">
+    <div class="modal glass">
+      <p id="careText">亲爱的，是不是该休息了？</p>
+      <div class="btn-container">
+        <button class="btn-glass" id="btn-care-yes">好，我休息</button>
+        <button class="btn-glass" id="btn-care-no">再玩会儿</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 第二层更深关怀 -->
+  <div id="modal-second" class="overlay">
+    <div class="modal glass">
+      <p>长时间用眼对视力不好哦，再拖延可就太晚啦～</p>
+      <div class="btn-container">
+        <button class="btn-glass" id="care2-yes">好吧，我睡</button>
+        <button class="btn-glass" id="care2-no">还是不困</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 理由 -->
+  <div id="modal-reason" class="overlay">
+    <div class="modal glass">
+      <p>告诉我原因吧～</p>
+      <div class="btn-container">
+        <button class="btn-glass reason-btn">刷视频</button>
+        <button class="btn-glass reason-btn">工作 / 学习</button>
+      </div>
+      <button class="btn-glass" id="reason-skip">随便看看</button>
+    </div>
+  </div>
+
+  <!-- 呼吸倒计时 -->
+  <div id="modal-breath" class="overlay">
+    <div class="modal glass">
+      <h3>闭眼深呼吸</h3>
+      <div class="countdown" id="countdownNum">5</div>
+      <div class="breath-wrap"><div class="breath-circle"></div></div>
+    </div>
+  </div>
+
+  <!-- 早安问候 -->
+  <div id="modal-morning" class="overlay">
+    <div class="modal glass">
+      <h3>早安！</h3>
+      <p id="sleepInfo"></p>
+      <button class="btn-glass" id="morning-ok">开启新一天</button>
+    </div>
+  </div>
+
+  <!-- 心情记录 -->
+  <div id="modal-mood" class="overlay">
+    <div class="modal glass">
+      <h3>记录今晚的心情</h3>
+      <div class="mood-grid">
+        <button class="mood-btn" data-mood="😊">😊</button>
+        <button class="mood-btn" data-mood="😌">😌</button>
+        <button class="mood-btn" data-mood="🙂">🙂</button>
+        <button class="mood-btn" data-mood="😟">😟</button>
+        <button class="mood-btn" data-mood="😢">😢</button>
+        <button class="mood-btn" data-mood="😡">😡</button>
+      </div>
+      <textarea id="moodNote" placeholder="想补充点什么？"></textarea>
+      <div class="btn-container">
+        <button class="btn-glass" id="saveMood">保存</button>
+        <button class="btn-glass" id="closeMood">关闭</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 统计 -->
+  <div id="modal-stats" class="overlay">
+    <div class="modal glass">
+      <h3>睡眠 / 心情统计</h3>
+      <canvas id="statsChart"></canvas>
+      <button class="btn-glass" id="closeStats">关闭</button>
+    </div>
+  </div>
+
+  <!-- 历史记录 -->
+  <div id="modal-history" class="overlay">
+    <div class="modal glass">
+      <h3>历史记录</h3>
+      <div id="historyList" class="history-box"></div>
+      <button class="btn-glass" id="closeHistory">关闭</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
